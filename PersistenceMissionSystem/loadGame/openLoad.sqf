@@ -1,4 +1,9 @@
+
 private _dialog = createDialog "loadGameDialog";
+missionNameSpace setVariable ["pms_currentSaveGamesLoaded",false,true];
+[] remoteExec ["pms_fnc_getSaves",2];
+waitUntil {missionNameSpace getVariable ["pms_currentSaveGamesLoaded",false];};
+private _allSaves = missionNameSpace getVariable ["pms_currentSaveGames",[]];
 {
 	private _split = _x splitString "-";
 	private _thisWorld = format ["%1save",worldName];
@@ -11,4 +16,4 @@ private _dialog = createDialog "loadGameDialog";
 			lbSetData  [1500,_thisLine,_x];
 		};
 	};
-} forEach allVariables profileNameSpace;
+} forEach _allSaves;

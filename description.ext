@@ -1,1 +1,2 @@
 #include "PersistenceMissionSystem\pmsConfig.hpp"
+disabledAI = 1;

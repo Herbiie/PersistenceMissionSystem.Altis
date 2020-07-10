@@ -16,6 +16,9 @@ class cfgFunctions {
 			class saveGroup {
 				file = "PersistenceMissionSystem\saveGame\saveGroup.sqf";
 			};
+			class getSaves {
+				file = "PersistenceMissionSystem\saveGame\getSaves.sqf";				
+			};
 		};
 		
 		class loadGame {

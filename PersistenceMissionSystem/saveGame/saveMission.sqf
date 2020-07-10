@@ -4,14 +4,14 @@ pms_players = [];
 pms_playerIDs = [];
 pms_groups = [];
 private _variable = format ["%1save-%2",worldName,_variableText];
-hint "Saving players...";
+["Saving players..."] remoteExec ["hint",0];
 {
 	if (vehicle _x != _x) then {
 		_x action ["Eject",vehicle _x];
 	};
 	[_x] call pms_fnc_savePlayer;
 } forEach allPlayers;
-hint "Saving vehicles...";
+["Saving vehicles..."] remoteExec ["hint",0];
 
 {
 	if (count crew _x == 0) then {
@@ -51,5 +51,12 @@ private _saveGroups = [];
 } forEach _saveGroups;
 
 profileNameSpace setVariable [_variable,[pms_vehicles,pms_players,pms_playerIDs,pms_groups]];
+private _allSaves = profileNameSpace getVariable ["pms_saveGames",[]];
+if (_variable in _allsaves) then {
+	_allSaves deleteAt (_allSaves find _variable);
+};
+_allSaves pushBackUnique _variable;
+profileNameSpace setVariable ["pms_saveGames",_allSaves];
+
 saveProfileNameSpace;
-hint "Saved";
+["Saved"] remoteExec ["hint",0];
